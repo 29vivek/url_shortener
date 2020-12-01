@@ -15,9 +15,9 @@ class Link(db.Model):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.short_url = self.generate_short_link()
+        self.short_url = self.generate_short_link(self.original_url)
 
-    def generate_short_link(self):
+    def generate_short_link(self, url):
         """
         Shortens a url by generating a 9 byte hash, and then
         converting it to a 12 character long base 64 url friendly string.
@@ -28,13 +28,13 @@ class Link(db.Model):
         Return values:
         String, the unique shortened url, acting as a key for the entered long url.
         """
-        url_hash = blake2b(str.encode(self.original_url), digest_size=9)
+        url_hash = blake2b(str.encode(url), digest_size=9)
         b64 = b64encode(url_hash.digest(), altchars=b'-_').decode('utf-8')
 
         already_shortened = self.query.filter_by(short_url=b64).first()
 
         if already_shortened:
-            self.original_url += str(random.randint(0, 9))
-            return self.generate_short_link()
+            url += str(random.randint(0, 9))
+            return self.generate_short_link(url)
         
         return b64

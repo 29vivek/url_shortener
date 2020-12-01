@@ -1,4 +1,88 @@
-<form method="POST" action="{{ url_for('short.add_link')}}">
+<!-- <form method="POST" action="{{ url_for('short.add_link')}}">
     <input type="text" name="original_url">
     <input type="submit">
-</form>
+</form> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <a href="/">
+                <h1 class="title">
+                    URL Shortener.
+                </h1>
+            </a>
+            <h2 class="subtitle">
+                Anything -> <strong>12 characters</strong>, guaranteed
+            </h2>
+          </div>
+      </section>
+
+    <!-- <section class="section">
+        <div class="container">
+        <h1 class="title">URL Shortener.</h1>
+        <h2 class="subtitle">
+            Anything -> <strong>12 characters</strong>, guaranteed
+        </h2>
+        </div>
+    </section> -->
+
+    <section class="section">
+        <div class="container">
+            <form method="POST" action="{{ url_for('short.add_link') }}">
+                <div class="field">
+                    <label class="label">Enter your long URL. Doesn't necessarily have to be long.</label>
+                    <div class="control">
+                        <input class="input" type="text" name="original_url" placeholder="your url">
+                    </div>
+                    <p class="help">Enter a valid URL.</p>
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-primary">Shorten</button>
+                </div>
+    
+            </form>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <p class="buttons">
+                <a class="button" href="stats">
+                    <span class="icon">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    <span>Statistics</span>
+                </a>
+                <a class="button" href="github.com">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>GitHub</span>
+                </a>
+              </p>
+        </div> 
+    </section>
+    
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>URL Shortener</strong> by Vivek Kekuda and Yashash HL. The website is brought to you by <a href="https://bulma.io/" target="_blank">Bulma</a>.
+          </p>
+        </div>
+         
+      </footer>
+
+  </body>
+</html>
+

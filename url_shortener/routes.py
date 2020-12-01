@@ -50,7 +50,7 @@ def add_link():
         url = 'http://' + url
 
     if not url_valid(url):
-        return render_template('invalid.html', url=url)
+        return render_template('404.html', status_code=400, original_url=url), 400
 
     link = Link(original_url=url)
     db.session.add(link)
@@ -67,4 +67,4 @@ def stats():
 
 @short.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html', status_code=404), 404
