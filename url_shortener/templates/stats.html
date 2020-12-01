@@ -32,31 +32,41 @@ Visits: {{ link.visits }}
 
     <section class="section">
         <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Original URL</th>
-                        <th>Short URL</th>
-                        <th>Visits</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Original URL</th>
-                        <th>Short URL</th>
-                        <th>Visits</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    {% for link in links %}
-                    <tr>
-                        <td>{{ link.original_url }}</td>
-                        <td>{{ url_for('short.redirect_to_url', short_url=link.short_url, _external=True) }}</td>
-                        <td>{{ link.visits }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+            {% block content %}
+                {% if links %}
+                    <table class="table">
+                    
+                        <thead>
+                            <tr>
+                                <th>Original URL</th>
+                                <th>Short URL</th>
+                                <th>Visits</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Original URL</th>
+                                <th>Short URL</th>
+                                <th>Visits</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            {% for link in links %}
+                            <tr>
+                                <td>{{ link.original_url }}</td>
+                                <td>{{ url_for('short.redirect_to_url', short_url=link.short_url, _external=True) }}</td>
+                                <td>{{ link.visits }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>Nothing to see here. Move along..</p>
+                {% endif %}
+            {% endblock content %}
+
+            
         </div>
     </section>
     
