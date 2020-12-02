@@ -32,10 +32,10 @@
                {{ status_code }} :/
             </p>
             {% block content %}
-                {% if original_url %}
-                    <p> {{ original_url }} is not a valid URL.</p>
+                {% if message %}
+                    <p> {{ message }} </p>
                 {% else %}
-                    <p>You might wanna check your URL.</p>
+                    <p> You might wanna check your URL.</p>
                 {% endif %}
             {% endblock content %}
     </section>

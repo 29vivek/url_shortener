@@ -33,6 +33,9 @@ short = Blueprint('short', __name__)
 def redirect_to_url(short_url):
     link = Link.query.filter_by(short_url=short_url).first_or_404()
 
+    if link.visits >= 5:
+        return render_template('404.html', status_code=500, message=f'Shortened code {link.short_url} has exceeded number of visits ({link.visits}) and is no longer valid. '), 500
+
     link.visits = link.visits + 1
     db.session.commit()
 
@@ -50,7 +53,7 @@ def add_link():
         url = 'http://' + url
 
     if not url_valid(url):
-        return render_template('404.html', status_code=400, original_url=url), 400
+        return render_template('404.html', status_code=400, message=f'{url} is not a valid url.'), 400
 
     link = Link(original_url=url)
     db.session.add(link)
